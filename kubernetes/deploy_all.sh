@@ -1,20 +1,16 @@
 #!/bin/bash
 
-arg="${1:-apply}"
+kubectl apply -f rabbitmq/rabbitmq-pv-pvc.yml
+kubectl apply -f rabbitmq/rabbitmq-statefulset.yml
+kubectl apply -f rabbitmq/rabbitmq-service.yml
 
-kubectl "$arg" -f rabbitmq/rabbitmq-pv-pvc.yml
-kubectl "$arg" -f rabbitmq/rabbitmq-statefulset.yml
-kubectl "$arg" -f rabbitmq/rabbitmq-service.yml
+kubectl wait --namespace=karsajobs-ns --timeout=50s --for=condition=Ready pod/rabbitmq-0
 
-if [ "$arg" = "apply" ]; then
-   kubectl wait --namespace=karsajobs-ns --timeout=100s --for=condition=Ready pod/rabbitmq-0
-fi
+kubectl apply -f order/order-deployment.yml
+kubectl apply -f order/order-service.yml
 
-kubectl "$arg" -f order/order-deployment.yml
-kubectl "$arg" -f order/order-service.yml
+kubectl apply -f shipping/shipping-deployment.yml
+kubectl apply -f shipping/shipping-service.yml
 
-kubectl "$arg" -f shipping/shipping-deployment.yml
-kubectl "$arg" -f shipping/shipping-service.yml
-
-kubectl "$arg" -f istio/gateway.yml
-kubectl "$arg" -f istio/order-virtual-service.yml
+kubectl apply -f istio/gateway.yml
+kubectl apply -f istio/order-virtual-service.yml
