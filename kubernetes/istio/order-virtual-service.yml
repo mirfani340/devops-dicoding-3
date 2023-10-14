@@ -1,19 +1,19 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3  # Specifies the API version being used for this Istio VirtualService resource.
+kind: VirtualService  # Defines the type of Kubernetes resource, in this case, it's a VirtualService for Istio.
 metadata:
-  name: order-virtual-service
-  namespace: karsajobs-ns
+  name: order-virtual-service  # Specifies the name of the VirtualService resource, which is "order-virtual-service".
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this VirtualService will be created.
 spec:
   hosts:
-    - '*'
+    - '*'  # Specifies the hosts for which this VirtualService applies. In this case, it's set to "*" (wildcard), meaning it applies to all hosts.
   gateways:
-    - service-gateway
+    - service-gateway  # Specifies the Gateway(s) to which this VirtualService is bound. In this case, it's "service-gateway."
   http:
     - match:
         - uri:
-            exact: /order
+            exact: /order  # Defines the conditions under which this rule applies. It matches requests with the exact URI "/order".
       route:
         - destination:
-            host: order-service
+            host: order-service  # Specifies the destination service to route traffic to, in this case, "order-service".
             port:
-              number: 3000
+              number: 3000  # Specifies the port number (3000) on the destination service to route traffic to.

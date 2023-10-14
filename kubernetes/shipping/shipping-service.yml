@@ -1,11 +1,11 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1  # Specifies the API version for this Kubernetes resource, which is the core/v1 version.
+kind: Service  # Defines the type of Kubernetes resource, in this case, it's a Service for exposing a network service.
 metadata:
-  name: shipping-service
-  namespace: karsajobs-ns
+  name: shipping-service  # Specifies the name of the Service resource, which is "shipping-service."
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this Service will be created.
 spec:
   ports:
-  - name: http-shipping
-    port: 3001
+  - name: http-shipping  # Assigns a name "http-shipping" to the service port.
+    port: 3001  # Specifies the port number at which the Service listens (3001).
   selector:
-    app: shipping
+    app: shipping  # Selects Pods to include in this Service based on the label "app: shipping."

@@ -1,15 +1,15 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
+apiVersion: networking.istio.io/v1alpha3  # Specifies the API version being used for this Istio Gateway resource.
+kind: Gateway  # Defines the type of Kubernetes resource, in this case, it's a Gateway for Istio.
 metadata:
-  name: service-gateway
-  namespace: karsajobs-ns
+  name: service-gateway  # Specifies the name of the Gateway resource, which is "service-gateway".
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this Gateway will be created.
 spec:
   selector:
-    istio: ingressgateway
-  servers:
+    istio: ingressgateway  # This is a label selector for selecting the Ingress Gateway that this Gateway should be associated with.
+  servers:  # Configures the servers that this Gateway should use to accept incoming traffic.
     - port:
-        number: 80
-        name: http
-        protocol: HTTP
+        number: 80  # Specifies the port number (80) for the server to listen on.
+        name: http  # Assigns a name "http" to this server.
+        protocol: HTTP  # Specifies that the protocol used is HTTP.
       hosts:
-        - '*'
+        - '*'  # Specifies the hosts for which traffic should be accepted. In this case, it's set to "*" (wildcard), meaning it will accept traffic for all hosts.

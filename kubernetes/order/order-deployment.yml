@@ -1,24 +1,24 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1  # Specifies the API version for this Kubernetes resource, using the "apps/v1" version.
+kind: Deployment  # Defines the type of Kubernetes resource, in this case, it's a Deployment for managing application deployments.
 metadata:
-  name: order
-  namespace: karsajobs-ns
+  name: order  # Specifies the name of the Deployment resource, which is "order".
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this Deployment will be created.
 spec:
   selector:
     matchLabels:
-      app: order
+      app: order  # Selects Pods for this Deployment based on labels; Pods with the label "app: order" will be managed by this Deployment.
   template:
     metadata:
       labels:
-        app: order
+        app: order  # Specifies the labels for the Pods created by this Deployment; in this case, "app: order."
     spec:
       containers:
-        - name: order
-          image: 'ghcr.io/mirfani340/devops-dicoding-3/order-services:v1'
+        - name: order  # Specifies the name of the container within the Pod.
+          image: 'ghcr.io/mirfani340/devops-dicoding-3/order-services:v1'  # Specifies the Docker image to use for this container.
           ports:
-            - containerPort: 3000
+            - containerPort: 3000  # Specifies the port on which the container listens for incoming traffic (3000).
           env:
-            - name: PORT
+            - name: PORT  # Sets an environment variable "PORT" with the value "3000" for the container.
               value: '3000'
-            - name: AMQP_URL
+            - name: AMQP_URL  # Sets an environment variable "AMQP_URL" with the RabbitMQ URL.
               value: 'amqp://rabbitmq-service.default.svc.cluster.local:5672'

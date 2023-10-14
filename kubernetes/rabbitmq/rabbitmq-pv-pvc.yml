@@ -1,26 +1,27 @@
 ---
-apiVersion: v1
-kind: PersistentVolume
+apiVersion: v1  # Specifies the API version for this Kubernetes resource, which is the core/v1 version.
+kind: PersistentVolume  # Defines the type of Kubernetes resource, which is a PersistentVolume for managing storage.
 metadata:
-  name: rabbitmq-pv
-  namespace: karsajobs-ns
+  name: rabbitmq-pv  # Specifies the name of the PersistentVolume resource, which is "rabbitmq-pv."
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this PersistentVolume is defined.
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteOnce  # Defines the access mode for the volume, allowing read-write access by a single node at a time.
   capacity:
-    storage: 10Gi
+    storage: 10Gi  # Specifies the storage capacity of the volume, which is 10 gigabytes.
   hostPath:
-    path: /data/rabbitmq-pv
-  storageClassName: manual
+    path: /data/rabbitmq-pv  # Specifies the host path where the volume is mounted on the node's file system.
+  storageClassName: manual  # Assigns a storage class name "manual" to the PersistentVolume.
+
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
+apiVersion: v1  # Specifies the API version for this Kubernetes resource, which is the core/v1 version.
+kind: PersistentVolumeClaim  # Defines the type of Kubernetes resource, which is a PersistentVolumeClaim for requesting storage.
 metadata:
-  name: rabbitmq-pvc
+  name: rabbitmq-pvc  # Specifies the name of the PersistentVolumeClaim resource, which is "rabbitmq-pvc."
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteOnce  # Specifies the access mode requested for the volume, which is read-write access by a single node at a time.
   resources:
     requests:
-      storage: 10Gi
-  storageClassName: manual
+      storage: 10Gi  # Requests 10 gigabytes of storage capacity for the PersistentVolumeClaim.
+  storageClassName: manual  # Specifies the storage class name to be used when provisioning the storage, which is "manual."

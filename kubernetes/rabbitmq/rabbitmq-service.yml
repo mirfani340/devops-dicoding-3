@@ -1,11 +1,11 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1  # Specifies the API version for this Kubernetes resource, which is the core/v1 version.
+kind: Service  # Defines the type of Kubernetes resource, in this case, it's a Service for exposing a network service.
 metadata:
-  name: rabbitmq-service
-  namespace: karsajobs-ns
+  name: rabbitmq-service  # Specifies the name of the Service resource, which is "rabbitmq-service."
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this Service will be created.
 spec:
   ports:
-  - name: tcp-rabbitmq
-    port: 5672
+  - name: tcp-rabbitmq  # Assigns a name "tcp-rabbitmq" to the service port.
+    port: 5672  # Specifies the port number at which the Service listens (5672), commonly used for RabbitMQ.
   selector:
-    app: rabbitmq
+    app: rabbitmq  # Selects Pods to include in this Service based on the label "app: rabbitmq."

@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1  # Specifies the API version for this Kubernetes resource, which is the core/v1 version.
+kind: Service  # Defines the type of Kubernetes resource, in this case, it's a Service for exposing a network service.
 metadata:
-  name: order-service
-  namespace: karsajobs-ns
+  name: order-service  # Specifies the name of the Service resource, which is "order-service".
+  namespace: karsajobs-ns  # Specifies the Kubernetes namespace where this Service will be created.
 spec:
   selector:
-    app: order
+    app: order  # Selects Pods to include in this Service based on the label "app: order."
   ports:
-    - protocol: TCP
-      name: http-order
-      port: 3000
-      targetPort: 3000
+    - protocol: TCP  # Specifies the protocol used for the port (TCP).
+      name: http-order  # Assigns a name "http-order" to this port.
+      port: 3000  # Specifies the port number at which the Service listens (3000).
+      targetPort: 3000  # Specifies the target port on the selected Pods where the traffic is forwarded to (also 3000).
