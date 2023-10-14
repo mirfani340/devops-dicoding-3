@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  namespace: karsajobs-ns
+spec:
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: 'ghcr.io/mirfani340/devops-dicoding-3/order-services:v1'
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: '3000'
+            - name: AMQP_URL
+              value: 'amqp://rabbitmq-service.default.svc.cluster.local:5672'
